@@ -1,6 +1,7 @@
 package com.ergys2000.wikibuilder.db_models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,10 +23,18 @@ public class User {
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Project> projects;
+    private List<Project> projects;
 
     public Long getId() {
         return id;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
     }
 
     public void setId(Long id) {
@@ -62,7 +71,4 @@ public class User {
         this.password = password;
     }
 
-    public Set<Project> getProjects() { return projects; }
-
-    public void setProjects(Set<Project> projects) { this.projects = projects; }
 }

@@ -2,7 +2,7 @@ package com.ergys2000.wikibuilder.db_models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Project {
@@ -20,7 +20,7 @@ public class Project {
     private LocalDate createdAt;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<User> members;
+    private List<User> members;
 
     public Long getId() {
         return id;
@@ -30,11 +30,11 @@ public class Project {
         this.id = id;
     }
 
-    public Set<User> getMembers() {
+    public List<User> getMembers() {
         return members;
     }
 
-    public void setMembers(Set<User> members) {
+    public void setMembers(List<User> members) {
         this.members = members;
     }
 

@@ -19,19 +19,4 @@ public class UsersController {
     public Optional<User> getUser(@PathVariable("userId") Integer userId) {
         return userService.getUserById(userId);
     }
-
-    @GetMapping("/projects")
-    public Set<Project> getProjects(@PathVariable("userId") Integer userId) {
-        return userService.getUserProjects(userId);
-    }
-
-    @PostMapping("/projects")
-    public void postProject(@PathVariable("userId") Integer userId, Project project) {
-        try {
-            userService.createNewProject(Long.valueOf(userId), project);
-        } catch (Exception e) {
-
-        }
-    }
-
 }
