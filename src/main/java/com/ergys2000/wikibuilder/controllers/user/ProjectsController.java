@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RequestMapping("/users/{userId}/projects")
 @RestController
@@ -51,8 +50,13 @@ public class ProjectsController {
     }
 
     @DeleteMapping("/{projectId}")
-    public void deleteProject() {
-        /* TODO: Implement this function */
+    public ResponseWrapper<Project> deleteProject(@PathVariable("projectId") Integer projectId) {
+        try {
+            Project project = userService.deleteProject(projectId);
+            return new ResponseWrapper<>("OK", project, "Project deleted successfully!");
+        } catch(Exception e) {
+            return new ResponseWrapper<>("ERROR", null, e.getMessage());
+        }
     }
 
     @GetMapping("/{projectId}/categories")

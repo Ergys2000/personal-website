@@ -38,6 +38,15 @@ public class UserService {
         projectsRepository.save(project);
     }
 
+    public Project deleteProject(Integer projectId) throws Exception {
+        Optional<Project> project = projectsRepository.findById(Long.valueOf(projectId));
+        if(!project.isPresent()) {
+            throw new Exception("There is no project with that id");
+        }
+        projectsRepository.delete(project.get());
+        return project.get();
+    }
+
     public void updateProject(Integer projectId, Project project) throws Exception {
         Optional<Project> projectInDb = projectsRepository.findById(Long.valueOf(projectId));
         if(!projectInDb.isPresent()) {
