@@ -13,7 +13,7 @@ type EditorProps = {
 export default (props: EditorProps) => {
     const editorId = crypto.randomBytes(20).toString('hex');
     useEffect(() => {
-        return () => {
+        if (document.getElementById(`editorjs-${editorId}`)) {
             editor = new EditorJS({
                 holder: `editorjs-${editorId}`,
                 tools: {
@@ -35,7 +35,7 @@ export default (props: EditorProps) => {
         editor.save().then((res: any) => console.log(res)).catch((err: any) => console.log(err))
     }
     return (
-        <div className='flex flex-col items-stretch bg-gray-700 text-gray-300 w-full'>
+        <div className='flex flex-col items-stretch w-full'>
             <div id={`editorjs-${editorId}`} className="flex-1">
             </div>
             <div className="flex flex-row justify-center">
