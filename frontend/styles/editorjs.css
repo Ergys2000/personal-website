@@ -1,0 +1,12 @@
+.editorjs-renderer h1 {
+    @apply text-3xl;
+}
+.editorjs-renderer h2 {
+    @apply text-2xl;
+}
+.editorjs-renderer h3 {
+    @apply text-xl;
+}
+.editorjs-renderer h4 {
+    @apply text-lg;
+}

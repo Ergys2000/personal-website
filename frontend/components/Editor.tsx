@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 let editor: any;
 
 type EditorProps = {
-    onSave: (editor: any) => void;
+    onSave: (cleanData: any) => void;
 };
 export default (props: EditorProps) => {
     const editorId = crypto.randomBytes(20).toString('hex');
@@ -32,7 +32,7 @@ export default (props: EditorProps) => {
         }
     }, []);
     const onSave = () => {
-        editor.save().then((res: any) => console.log(res)).catch((err: any) => console.log(err))
+        editor.save().then((res: any) => props.onSave(res)).catch((err: any) => console.log(err))
     }
     return (
         <div className='flex flex-col items-stretch w-full'>
