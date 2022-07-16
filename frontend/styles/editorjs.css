@@ -1,12 +1,77 @@
-.editorjs-renderer h1 {
-    @apply text-3xl;
-}
-.editorjs-renderer h2 {
+.codex-editor h2 {
     @apply text-2xl;
 }
-.editorjs-renderer h3 {
+.codex-editor h3 {
     @apply text-xl;
 }
-.editorjs-renderer h4 {
+.codex-editor h4 {
     @apply text-lg;
+}
+.cdx-block {
+    @apply text-gray-400;
+}
+.ce-toolbar__plus, .ce-toolbar__settings-btn {
+    @apply text-gray-400 hover:text-gray-300 hover:bg-indigo-600;
+}
+.ce-toolbox {
+    @apply text-gray-800;
+}
+
+.ce-inline-toolbar {
+    @apply bg-gray-900 border-black;
+}
+.ce-inline-toolbar__dropdown {
+    @apply text-indigo-600 hover:bg-transparent hover:text-gray-300 border-r-black;
+}
+.ce-inline-tool {
+    @apply text-indigo-600 hover:bg-transparent hover:text-gray-300;
+}
+
+.ce-header {
+    @apply text-gray-300;
+}
+
+.ce-popover {
+    @apply bg-gray-900 border-black;
+}
+.ce-popover__items {
+    @apply bg-gray-800;
+}
+.ce-popover__item {
+    @apply bg-gray-800 text-gray-400;
+}
+.ce-popover__item:hover {
+    @apply bg-indigo-600 text-gray-300;
+}
+.ce-popover__item--focused {
+    @apply bg-indigo-600 text-gray-200;
+}
+.ce-popover__item-icon {
+    @apply text-indigo-400 bg-gray-800;
+}
+.cdx-search-field {
+    @apply bg-gray-800 text-gray-400;
+}
+
+span.cdx-checklist__item-checkbox {
+    @apply bg-gray-600 border-black;
+}
+
+div.tc-popover {
+    @apply bg-gray-800 border-black border shadow-xl;
+}
+div.tc-popover__item-icon {
+    @apply bg-gray-600;
+}
+div.tc-popover__item {
+    @apply hover:bg-gray-500 hover:text-white text-gray-300;
+}
+div.tc-add-row, div.tc-add-column {
+    @apply hover:bg-gray-600;
+}
+div.tc-add-row:hover:before {
+    @apply bg-gray-600;
+}
+div.tc-cell--selected {
+    @apply bg-gray-700;
 }

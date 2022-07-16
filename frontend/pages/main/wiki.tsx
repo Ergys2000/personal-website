@@ -1,8 +1,8 @@
+import { useDisclosure, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Divider } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import React, { useState } from "react";
-import { CleanData } from "../../editorjs-parser/types";
 import EditorJsRenderer from "../../editorjs-renderer/EditorJsRenderer";
-import { Header, Paragraph, Checklist } from "../../editorjs-renderer/Renderers";
+import { CleanData } from "../../editorjs-renderer/types";
 import MainLayout from "../../layouts/MainLayout";
 
 let Editor = dynamic(() => import("../../components/Editor"), { ssr: false });
@@ -13,23 +13,19 @@ export default function Wiki(props: any) {
     blocks: [],
     version: '',
   });
-  const renderersObject = {
-    'paragraph': Paragraph,
-    'header': Header,
-    'checklist': Checklist,
-  }
-  const onSave = (cleanData: CleanData) => {
-    console.log(cleanData);
+  const handleChange = (cleanData: CleanData) => {
     setCleanData(cleanData);
   }
   return (
-    <div className="w-full h-full bg-gray-300">
-      <Editor onSave={onSave} />
-      <h1>Rendered page:</h1>
-      <EditorJsRenderer cleanData={cleanData as any} renderersObject={renderersObject} />
+    <div className="w-full h-full p-10">
+      <div className="bg-gray-900 min-w-min overflow-auto max-h-96">
+        <Editor handleChange={handleChange} />
+      </div>
+      <Divider />
     </div>
   );
 }
+
 
 Wiki.getLayout = (page: React.ReactElement) => {
   return (

@@ -1,3 +1,4 @@
+import { Button, Input } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { NextPage } from "next/types"
 import React, { useState } from "react";
@@ -16,12 +17,15 @@ const Login: NextPage = () => {
 	}
 	const onSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
+		console.log(form);
 		authenticate(form.username, form.password).then(res => {
 			if(res.status === "OK") {
 				history.push(`/main`);
+			} else {
+				console.log(res);
 			}
 		}).catch(res => {
-
+			console.log(res);
 		});
 	}
 	return (
@@ -30,15 +34,13 @@ const Login: NextPage = () => {
 				<p className="text-xl text-gray-400">Personal Website</p>
 				<div className="flex flex-col items-start w-full mt-10">
 					<label className="text-gray-400">Username</label>
-					<input name="username" value={form.username} onChange={onChange} className="rounded-xl bg-gray-700 w-full border border-transparent
-					 text-gray-300 p-2 focus:outline-0 focus:border-purple-700" />
+					<Input colorScheme={"blue"} color="gray.200" name="username" value={form.username} onChange={onChange}  />
 				</div>
 				<div className="flex flex-col items-start w-full mt-5">
 					<label className="text-gray-400">Password</label>
-					<input name="password" value={form.password} onChange={onChange} type="password" className="rounded-xl bg-gray-700 w-full border border-transparent
-					 text-gray-300 p-2 focus:outline-0 focus:border-purple-700" />
+					<Input colorScheme={"blue"} color="gray.200" name="password" value={form.password} onChange={onChange} type="password" />
 				</div>
-				<button className="mt-10 bg-purple-700 rounded-xl px-5 py-3">Log in</button>
+				<Button onClick={onSubmit} colorScheme={"blue"} my="5">Log in</Button>
 			</form>
 		</div>
 	);	

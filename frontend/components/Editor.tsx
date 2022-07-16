@@ -3,14 +3,22 @@ import Checklist from '@editorjs/checklist';
 import Header from '@editorjs/header';
 import Table from '@editorjs/table';
 import crypto from 'crypto';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Button, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import EditorJsRenderer from '../editorjs-renderer/EditorJsRenderer';
+import { CleanData } from '../editorjs-renderer/types';
 
 let editor: any;
 
 type EditorProps = {
-    onSave: (cleanData: any) => void;
+    handleChange: (cleanData: CleanData) => void;
 };
 export default (props: EditorProps) => {
+    const [data, setData] = useState<CleanData>({
+        time: '',
+        blocks: [],
+        version: ''
+    });
     const editorId = crypto.randomBytes(20).toString('hex');
     useEffect(() => {
         if (document.getElementById(`editorjs-${editorId}`)) {
@@ -27,20 +35,34 @@ export default (props: EditorProps) => {
                         }
                     },
                     table: Table,
+                },
+                onChange: (api, event) => {
+                    api.saver.save().then((res: any) => {
+                        setData(res);
+                        props.handleChange(res)
+                    }).catch((err: any) => console.log(err))
                 }
             });
         }
     }, []);
-    const onSave = () => {
-        editor.save().then((res: any) => props.onSave(res)).catch((err: any) => console.log(err))
-    }
     return (
-        <div className='flex flex-col items-stretch w-full'>
-            <div id={`editorjs-${editorId}`} className="flex-1">
-            </div>
-            <div className="flex flex-row justify-center">
-                <button onClick={onSave} className="action-button px-5 py-2 ">Save</button>
-            </div>
+        <div className='flex flex-col items-stretch w-full min-w-min'>
+          <Tabs colorScheme={"blue"} variant={"soft-rounded"}>
+            <TabList>
+              <Tab color={"gray.300"}>Rich text</Tab>
+              <Tab color={"gray.300"}>Rendered</Tab>
+            </TabList>
+
+            <TabPanels>
+              <TabPanel>
+                <div id={`editorjs-${editorId}`} className="flex-1">
+                </div>
+              </TabPanel>
+              <TabPanel>
+                <EditorJsRenderer cleanData={data} />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </div>
     );
 }
